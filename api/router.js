@@ -6,10 +6,26 @@ const valid = require('./validate');
 const router = express.Router();
 
 router.get('/users', (req,res,next) => {
+	console.log(req.signedCookies);
+	console.log(req.cookies);
 	queries.getAll().then(users => {
 		res.json(users);
 	});
 });
+
+// function validateCookie(req,res,next) {
+// 	console.log(req.signedCookies);
+// 	req.params.id = req.signedCookies;
+// 	next();
+// }
+
+
+// router.get('/users', (req,res,next) => {
+// 	console.log(req.signedCookies);
+// 	console.log(req.cookies);
+// 	console.log('signed');
+// });
+
 
 
 router.post('/auth/login', (req,res,next) => {

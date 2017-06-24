@@ -27,9 +27,9 @@ router.post('/auth/login', (req,res,next) => {
 							message: `Logged in as ${user.name}.`,
 						});
 					}
-				})
+				});
 			}
-		})
+		});
 	}
 });
 

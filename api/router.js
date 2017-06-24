@@ -29,8 +29,12 @@ router.post('/users', (req,res,next) => {
 							});
 						});
 				});
+			} else {
+				next(new Error("Email in use"));
 			}
 		});
+	} else {
+		next(new Error("Invalid User"));
 	}
 });
 

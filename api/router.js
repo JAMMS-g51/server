@@ -93,11 +93,6 @@ router.get('/users/:id/project', authMiddleware.allowAccess, (req, res) => {
 	}
 });
 
-// router.get('/users/:id/projects', (req, res) => {
-// 	queries.getProjectsByUserId(req.params.id).then(projects => {
-// 		res.json(projects)
-// 	});
-// });
 
 router.get('/project/:id/groupings', (req, res) => {
 	queries.getGroupingsByProjectId(req.params.id).then(groupingId => {
@@ -109,6 +104,13 @@ router.get('/grouping/:id/stories', (req, res) => {
 		res.json(storyId)
 	});
 });
+
+router.get('/project/:id', (req,res,next) => {
+	queries.getProjectById(req.params.id).then(project => {
+		res.json(project);
+	});
+});
+
 
 
 module.exports = router;

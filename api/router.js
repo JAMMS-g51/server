@@ -83,22 +83,32 @@ router.post('/users', (req,res,next) => {
 	}
 });
 
-// router.get('/users/:id/project', authMiddleware.allowAccess, (res, req) => {
-// 	console.log(req.params.id);
-// 	if (!isNaN(req.params.id)) {
-// 		queries.getProjectsByUserId(req.params.id).then(projects => {
-// 		res.json(projects);
-// 	});
-// 	} else {
-// 		console.log('here3');
-// 		resError(res, 500, "Invalid ID");
-// 	}
-// });
-
-router.get('/users/:id/project', (req, res) => {
-	queries.getProjectsByUserId(req.params.id).then(projects => {
+router.get('/users/:id/project', authMiddleware.allowAccess, (req, res) => {
+	if (!isNaN(req.params.id)) {
+		queries.getProjectsByUserId(req.params.id).then(projects => {
 		res.json(projects);
 	});
+	} else {
+		res.Error(res, 500, "Invalid ID");
+	}
 });
+
+// router.get('/users/:id/projects', (req, res) => {
+// 	queries.getProjectsByUserId(req.params.id).then(projects => {
+// 		res.json(projects)
+// 	});
+// });
+
+router.get('/project/:id/groupings', (req, res) => {
+	queries.getGroupingsByProjectId(req.params.id).then(groupingId => {
+		res.json(groupingId)
+	})
+})
+router.get('/grouping/:id/stories', (req, res) => {
+	queries.getStoriesByGroupingId(req.params.id).then(storyId => {
+		res.json(storyId)
+	});
+});
+
 
 module.exports = router;

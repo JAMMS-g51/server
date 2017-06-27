@@ -29,11 +29,11 @@ function allowAccess(req, res, next){
   if(token){
     // verify token
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
-      console.log('here2', err, decoded);
-      console.log('id', req.params.id, 'decoded id', decoded.id);
-      if(!err && req.params.id == decoded.id) return next();
+      if(!err && req.params.id == decoded.id){
+        return next();
+       }
       res.status(401)
-      next(new Error('Un-Authorized'))
+      next(new Error('Un-Authorized'));
     });
   }else{
     res.status(401)

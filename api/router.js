@@ -99,11 +99,11 @@ router.get('/project/:id/groupings', (req, res) => {
 		res.json(groupingId)
 	})
 })
-router.get('/grouping/:id/stories', (req, res) => {
-	queries.getStoriesByGroupingId(req.params.id).then(storyId => {
-		res.json(storyId)
-	});
-});
+// router.get('/grouping/:id/stories', (req, res) => {
+// 	queries.getStoriesByGroupingId(req.params.id).then(storyId => {
+// 		res.json(storyId)
+// 	});
+// });
 
 router.get('/project/:id', (req,res,next) => {
 	queries.getProjectById(req.params.id).then(project => {
@@ -111,6 +111,130 @@ router.get('/project/:id', (req,res,next) => {
 	});
 });
 
+router.delete('/project/:id', (req, res, next) => {
+	queries.deleteItem('project', req.params.id).then(response => {
+		res.json(response);
+	});
+});
 
+router.delete('/grouping/:id', (req, res, next) => {
+	queries.deleteItem('grouping', req.params.id).then(response => {
+		res.json(response);
+	});
+});
+
+router.delete('/story/:id', (req, res, next) => {
+	queries.deleteItem('story', req.params.id).then(response => {
+		res.json(response);
+	});
+});
+
+router.delete('/list/:id', (req, res, next) => {
+	queries.deleteItem('list', req.params.id).then(response => {
+		res.json(response);
+	});
+});
+
+router.delete('/list_item/:id', (req, res, next) => {
+	queries.deleteItem('list_item', req.params.id).then(response => {
+		res.json(response);
+	});
+});
+
+router.delete('/link/:id', (req, res, next) => {
+	queries.deleteItem('link', req.params.id).then(response => {
+		res.json(response);
+	});
+});
+
+router.delete('/comment/:id', (req, res, next) => {
+	queries.deleteItem('comment', req.params.id).then(response => {
+		res.json(response);
+	});
+});
+
+router.post('/project', (req, res, next) => {
+	queries.createItem('project', req.body).then(response =>{
+		res.json(response);
+	});
+});
+
+router.post('/grouping', (req, res, next) => {
+	queries.createItem('grouping', req.body).then(response =>{
+		res.json(response);
+	});
+});
+
+router.post('/story', (req, res, next) => {
+	queries.createItem('story', req.body).then(response =>{
+		res.json(response);
+	});
+});
+
+router.post('/link', (req, res, next) => {
+	queries.createItem('link', req.body).then(response =>{
+		res.json(response);
+	});
+});
+
+router.post('/comment', (req, res, next) => {
+	queries.createItem('comment', req.body).then(response =>{
+		res.json(response);
+	});
+});
+
+router.post('/list', (req, res, next) => {
+	queries.createItem('list', req.body).then(response =>{
+		res.json(response);
+	});
+});
+
+router.post('/list_item', (req, res, next) => {
+	queries.createItem('list_item', req.body).then(response =>{
+		res.json(response);
+	});
+});
+
+router.put('/project/:id', (req, res, next) => {
+	queries.updateItem('project', req.params.id, req.body).then(response => {
+		res.json(response);
+	});
+});
+
+router.put('/grouping/:id', (req, res, next) => {
+	queries.updateItem('grouping', req.params.id, req.body).then(response => {
+		res.json(response);
+	});
+});
+
+router.put('/story/:id', (req, res, next) => {
+	queries.updateItem('story', req.params.id, req.body).then(response => {
+		res.json(response);
+	});
+});
+
+router.put('/link/:id', (req, res, next) => {
+	queries.updateItem('link', req.params.id, req.body).then(response => {
+		res.json(response);
+	});
+});
+
+router.put('/comment/:id', (req, res, next) => {
+	queries.updateItem('comment', req.params.id, req.body).then(response => {
+		res.json(response);
+	});
+});
+
+router.put('/list/:id', (req, res, next) => {
+	queries.updateItem('list', req.params.id, req.body).then(response => {
+		res.json(response);
+	});
+});
+
+router.put('/list_item/:id', (req, res, next) => {
+	queries.updateItem('list_item', req.params.id, req.body).then(response => {
+		res.json(response);
+	});
+});
 
 module.exports = router;

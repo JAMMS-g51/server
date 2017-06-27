@@ -28,31 +28,24 @@ module.exports = {
 	getProjectById(id) {
 		return knex('project')
 			.where('id', id)
+			.first()
 			.then(project => {
 				return knex('grouping')
 					.where('project_id', id)
 					.then(groupings => {
 						project.groupings = groupings;
-						return {
-							groupings,
-							project
-						};
+						return project;
 					})
-			}).then(result => {
-				// console.log(result.project);
+			}).then(project => {
 				return Promise.all(
-					result.groupings.map(grouping => {
+					project.groupings.map(grouping => {
 						return knex('story')
 							.where('grouping_id', grouping.id)
 							.then(stories => {
-								// console.log('stories');
 								grouping.stories = stories;
-								console.log(grouping);
 
 								return Promise.all(
 									stories.map(story => {
-										// console.log('story');
-										// console.log(story);
 										return Promise.all([
 											knex('link').where('story_id', story.id),
 											knex('list').where('story_id', story.id),
@@ -61,7 +54,6 @@ module.exports = {
 											story.links = results[0];
 											story.lists = results[1];
 											story.comments = results[2];
-											// console.log(stories);
 
 											return Promise.all(
 												story.lists.map(list => {
@@ -71,16 +63,15 @@ module.exports = {
 															list.items = items;
 														});
 												})
+
 											)
 										})
 									})
 								)
 							})
 					})
-
-				).then(something => {
-					console.log(something);
-					return something.project;
+				).then(() => {
+					return project;
 				});
 			})
 	}

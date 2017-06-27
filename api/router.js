@@ -49,8 +49,12 @@ router.post('/auth/login', (req,res,next) => {
 								id: user.id
 							});
 						});
+					} else {
+						next(new Error("Invalid Password"))
 					}
 				});
+			} else {
+				next(new Error("Invalid Email"))
 			}
 		});
 	}

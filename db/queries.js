@@ -21,10 +21,24 @@ module.exports = {
 		return knex('grouping').where('project_id', id )
 		.select('grouping_id');
 	},
+
+	createItem(tableName, item){
+		return knex(tableName).insert(item, '*');
+	},
+
 	getStoriesByGroupingId(id){
 		return knex('story').where('grouping_id', id )
 		.select('*');
 	},
+
+	deleteItem(tableName, id){
+		return knex(tableName).where('id', id).del();
+	},
+
+	updateItem(tableName, id, item){
+		return knex(tableName).where('id', id).update(item, '*');
+	},
+
 	getProjectById(id) {
 		return knex('project')
 			.where('id', id)

@@ -95,10 +95,21 @@ router.post('/users', (req,res,next) => {
 // 	}
 // });
 
-router.get('/users/:id/project', (req, res) => {
+router.get('/users/:id/projects', (req, res) => {
 	queries.getProjectsByUserId(req.params.id).then(projects => {
-		res.json(projects);
+		res.json(projects)
 	});
 });
+router.get('/project/:id/groupings', (req, res) => {
+	queries.getGroupingsByProjectId(req.params.id).then(groupingId => {
+		res.json(groupingId)
+	})
+})
+router.get('/grouping/:id/stories', (req, res) => {
+	queries.getStoriesByGroupingId(req.params.id).then(storyId => {
+		res.json(storyId)
+	});
+});
+
 
 module.exports = router;

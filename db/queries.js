@@ -13,5 +13,17 @@ module.exports = {
 	getProjectsByUserId(id){
 		return knex('user_project').where('users_id', id)
 		.join('project', 'project_id', '=', 'project.id');
+	},
+	getGroupingsByProjectId(id){
+		return knex('grouping').where('project_id', id );
+	},
+	getGroupingIdByProjectId(id){
+		return knex('grouping').where('project_id', id )
+		.select('grouping_id');
+	},
+	getStoriesByGroupingId(id){
+		return knex('story').where('grouping_id', id )
+		.select('*');
 	}
+
 }

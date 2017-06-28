@@ -49,8 +49,12 @@ router.post('/auth/login', (req,res,next) => {
 								id: user.id
 							});
 						});
+					} else {
+						next(new Error("Invalid Email/Password"))
 					}
 				});
+			} else {
+				next(new Error("Invalid Email/Password"))
 			}
 		});
 	}
@@ -79,7 +83,7 @@ router.post('/users', (req,res,next) => {
 			}
 		});
 	} else {
-		next(new Error("Invalid User"));
+		next(new Error("Invalid Password"));
 	}
 });
 
@@ -105,7 +109,14 @@ router.get('/project/:id/groupings', (req, res) => {
 // 	});
 // });
 
-router.get('/project/:id', (req,res,next) => {
+router.get('/user_project/:id', (req, res) => {
+	queries.getUserProjectById(req.params.id).then(user_project => {
+		res.json(user_project)
+	})
+})
+
+router.get('/user/:userId/project/:id', authMiddleware.allowProjectAccess, (req,res,next) => {
+
 	queries.getProjectById(req.params.id).then(project => {
 		res.json(project);
 	});
@@ -154,7 +165,17 @@ router.delete('/comment/:id', (req, res, next) => {
 });
 
 router.post('/project', (req, res, next) => {
+	if(valid.project(req.body)){
 	queries.createItem('project', req.body).then(response =>{
+		res.json(response);
+	});
+} else {
+	next(new Error("Invalid Project Name"));
+}
+});
+
+router.post('/user_project', (req, res, next) => {
+	queries.createItem('user_project', req.body).then(response =>{
 		res.json(response);
 	});
 });

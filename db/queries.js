@@ -22,6 +22,13 @@ module.exports = {
 		.select('grouping_id');
 	},
 
+	getUserProjectByProjectId(id){
+		return knex('user_project').where('project_id', id);
+	},
+	getUserProjectById(id){
+		return knex('user_project').where('id',id);
+	},
+
 	createItem(tableName, item){
 		return knex(tableName).insert(item, '*');
 	},

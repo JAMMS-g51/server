@@ -31,16 +31,11 @@ router.get('/users', (req,res,next) => {
 
 
 router.post('/auth/login', (req,res,next) => {
-	if(valid.user(req.body)){
+	if(valid.user(req.body) && req.body.password >= 6){
 		queries.getUserByEmail(req.body.email).then(user => {
 			if(user) {
 				bcrypt.compare(req.body.password, user.password).then(result => {
 					if(result) {
-						// res.cookie('user_id', user.id, {
-						// 	httpOnly: true,
-						// 	secure: req.app.get('env') != 'development',
-						// 	signed: true
-						// });
 						jwt.sign({id: user.id}, process.env.TOKEN_SECRET, (err, token) => {
 							console.log(err, token);
 							res.json({
@@ -57,6 +52,8 @@ router.post('/auth/login', (req,res,next) => {
 				next(new Error("Invalid Email/Password"))
 			}
 		});
+	} else {
+		next(new Error("Invalid Email/Password"))
 	}
 });
 

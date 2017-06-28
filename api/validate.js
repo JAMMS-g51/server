@@ -6,5 +6,9 @@ module.exports = {
 						user.password.trim() != '' &&
 						user.password.trim().length >= 6;
 		return validEmail && validPassword;
+	},
+	project(project) {
+		const validProjectName = typeof project.name == 'string' && project.name.trim() != '';
+		return validProjectName;
 	}
-}
+};

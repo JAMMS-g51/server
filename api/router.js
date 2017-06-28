@@ -158,7 +158,17 @@ router.delete('/comment/:id', (req, res, next) => {
 });
 
 router.post('/project', (req, res, next) => {
+	if(valid.project(req.body)){
 	queries.createItem('project', req.body).then(response =>{
+		res.json(response);
+	});
+} else {
+	next(new Error("Invalid Project Name"));
+}
+});
+
+router.post('/user_project', (req, res, next) => {
+	queries.createItem('user_project', req.body).then(response =>{
 		res.json(response);
 	});
 });

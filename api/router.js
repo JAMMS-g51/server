@@ -31,7 +31,7 @@ router.get('/users', (req,res,next) => {
 
 
 router.post('/auth/login', (req,res,next) => {
-	if(valid.user(req.body) && req.body.password >= 6){
+	if(valid.user(req.body)){
 		queries.getUserByEmail(req.body.email).then(user => {
 			if(user) {
 				bcrypt.compare(req.body.password, user.password).then(result => {

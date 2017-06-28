@@ -109,6 +109,12 @@ router.get('/project/:id/groupings', (req, res) => {
 // 	});
 // });
 
+router.get('/user_project/:id', (req, res) => {
+	queries.getUserProjectById(req.params.id).then(user_project => {
+		res.json(user_project)
+	})
+})
+
 router.get('/user/:userId/project/:id', authMiddleware.allowProjectAccess, (req,res,next) => {
 
 	queries.getProjectById(req.params.id).then(project => {

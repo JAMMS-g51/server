@@ -50,11 +50,11 @@ router.post('/auth/login', (req,res,next) => {
 							});
 						});
 					} else {
-						next(new Error("Invalid Password"))
+						next(new Error("Invalid Email/Password"))
 					}
 				});
 			} else {
-				next(new Error("Invalid Email"))
+				next(new Error("Invalid Email/Password"))
 			}
 		});
 	}
@@ -83,7 +83,7 @@ router.post('/users', (req,res,next) => {
 			}
 		});
 	} else {
-		next(new Error("Invalid User"));
+		next(new Error("Invalid Password"));
 	}
 });
 

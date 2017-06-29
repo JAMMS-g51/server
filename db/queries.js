@@ -11,8 +11,8 @@ module.exports = {
 		return knex('users').where('email', email).first();
 	},
 	getProjectsByUserId(id){
-		return knex('user_project').where('users_id', id)
-		.join('project', 'project_id', '=', 'project.id');
+		return knex('project').where('users_id', id)
+		.join('user_project', 'project_id', '=', 'project.id');
 	},
 	getGroupingsByProjectId(id){
 		return knex('grouping').where('project_id', id );

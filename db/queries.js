@@ -34,6 +34,10 @@ module.exports = {
 		return knex('user_project').where('id',id);
 	},
 
+	getStoryById(id){
+		return knex('story').where('id',id);
+	},
+
 	createItem(tableName, item){
 		return knex(tableName).insert(item, '*');
 	},

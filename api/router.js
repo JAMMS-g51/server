@@ -103,9 +103,9 @@ router.get('/users/:id/project', authMiddleware.allowAccess, (req, res) => {
 
 router.get('/project/:id/groupings', (req, res) => {
 	queries.getGroupingsByProjectId(req.params.id).then(groupingId => {
-		res.json(groupingId)
-	})
-})
+		res.json(groupingId);
+	});
+});
 // router.get('/grouping/:id/stories', (req, res) => {
 // 	queries.getStoriesByGroupingId(req.params.id).then(storyId => {
 // 		res.json(storyId)
@@ -114,14 +114,19 @@ router.get('/project/:id/groupings', (req, res) => {
 
 router.get('/user_project/:id', (req, res) => {
 	queries.getUserProjectById(req.params.id).then(user_project => {
-		res.json(user_project)
-	})
-})
+		res.json(user_project);
+	});
+});
 
 router.get('/user/:userId/project/:id', authMiddleware.allowProjectAccess, (req,res,next) => {
-
 	queries.getProjectById(req.params.id).then(project => {
 		res.json(project);
+	});
+});
+
+router.get('/story/:id', authMiddleware.allowProjectAccess, (req,res,next) => {
+	queries.getStoryById(req.params.id).then(story => {
+		res.json(story);
 	});
 });
 

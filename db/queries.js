@@ -10,6 +10,11 @@ module.exports = {
 	getUserByEmail(email) {
 		return knex('users').where('email', email).first();
 	},
+
+	getUserById(id){
+		return knex('users').where('id', id);
+	},
+
 	getProjectsByUserId(id){
 		return knex('project').where('users_id', id)
 		.join('user_project', 'project_id', '=', 'project.id');

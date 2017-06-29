@@ -15,6 +15,12 @@ router.get('/users', (req,res,next) => {
 	});
 });
 
+router.get('/users/:id', (req,res,next) => {
+	queries.getUserById(req.params.id).then(user => {
+		res.json(user);
+	});
+});
+
 // function validateCookie(req,res,next) {
 // 	console.log(req.signedCookies);
 // 	req.params.id = req.signedCookies;

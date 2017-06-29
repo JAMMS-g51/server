@@ -124,7 +124,7 @@ router.get('/user/:userId/project/:id', authMiddleware.allowProjectAccess, (req,
 	});
 });
 
-router.get('/story/:id', authMiddleware.allowProjectAccess, (req,res,next) => {
+router.get('/story/:id', (req,res,next) => {
 	queries.getStoryById(req.params.id).then(story => {
 		res.json(story);
 	});
